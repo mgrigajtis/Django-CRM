@@ -5,7 +5,7 @@ from django.utils.translation import pgettext_lazy
 from phonenumber_field.modelfields import PhoneNumberField
 
 from accounts.models import Tags
-from common.models import Org, Profile
+from common.models import Org, Profile, CustomPhoneNumberField
 from common.base import BaseModel
 from common.utils import (
     COUNTRIES,
@@ -38,7 +38,7 @@ class Lead(BaseModel):
     first_name = models.CharField(_("First name"), null=True, max_length=255)
     last_name = models.CharField(_("Last name"), null=True, max_length=255)
     email = models.EmailField(null=True, blank=True)
-    phone = PhoneNumberField(null=True, blank=True)
+    phone = CustomPhoneNumberField(null=True, blank=True)
     status = models.CharField(
         _("Status of Lead"), max_length=255, blank=True, null=True, choices=LEAD_STATUS
     )
