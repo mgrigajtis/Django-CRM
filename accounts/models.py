@@ -6,7 +6,7 @@ from django.utils.translation import pgettext_lazy
 from phonenumber_field.modelfields import PhoneNumberField
 
 from common import utils
-from common.models import Org, Profile
+from common.models import Org, Profile, CustomPhoneNumberField
 from common.utils import COUNTRIES, INDCHOICES
 from contacts.models import Contact
 from teams.models import Teams
@@ -39,7 +39,7 @@ class Account(BaseModel):
 
     name = models.CharField(pgettext_lazy("Name of Account", "Name"), max_length=64)
     email = models.EmailField()
-    phone = PhoneNumberField(null=True)
+    phone = CustomPhoneNumberField(null=True, blank=True)
     industry = models.CharField(
         _("Industry Type"), max_length=255, choices=INDCHOICES, blank=True, null=True
     )

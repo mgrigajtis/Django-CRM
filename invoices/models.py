@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
 from accounts.models import Account
-from common.models import Address, Org, User
+from common.models import Address, Org, User, CustomPhoneNumberField
 from common.base import BaseModel
 from common.utils import CURRENCY_CODES
 from teams.models import Teams
@@ -49,7 +49,7 @@ class Invoice(BaseModel):
     currency = models.CharField(
         max_length=3, choices=CURRENCY_CODES, blank=True, null=True
     )
-    phone = PhoneNumberField(null=True, blank=True)
+    phone = CustomPhoneNumberField(null=True, blank=True)
     created_by = models.ForeignKey(
         User, related_name="invoice_created_by", on_delete=models.SET_NULL, null=True
     )
@@ -197,7 +197,7 @@ class InvoiceHistory(BaseModel):
     currency = models.CharField(
         max_length=3, choices=CURRENCY_CODES, blank=True, null=True
     )
-    phone = PhoneNumberField(null=True, blank=True)
+    phone = CustomPhoneNumberField(null=True, blank=True)
     # created_by = models.ForeignKey(
     #     User, related_name='invoice_history_created_by',
     #     on_delete=models.SET_NULL, null=True)
