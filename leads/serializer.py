@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from accounts.models import Account, Tags
+from tasks.models import Task
 from common.serializer import (
     AttachmentsSerializer,
     LeadCommentSerializer,
@@ -8,10 +9,10 @@ from common.serializer import (
     ProfileSerializer,
     UserSerializer,
 )
-from contacts.serializer import ContactSerializer
+
 from leads.models import Company, Lead
 from teams.serializer import TeamsSerializer
-
+from tasks.serializer import TaskSerializer
 
 class TagsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,7 +32,6 @@ class CompanySerializer(serializers.ModelSerializer):
 
 
 class LeadSerializer(serializers.ModelSerializer):
-    contacts = ContactSerializer(read_only=True, many=True)
     assigned_to = ProfileSerializer(read_only=True, many=True)
     created_by = UserSerializer()
     country = serializers.SerializerMethodField()
@@ -39,51 +39,14 @@ class LeadSerializer(serializers.ModelSerializer):
     lead_attachment = AttachmentsSerializer(read_only=True, many=True)
     teams = TeamsSerializer(read_only=True, many=True)
     lead_comments = LeadCommentSerializer(read_only=True, many=True)
+    tasks = TaskSerializer(read_only=True, many=True)
 
     def get_country(self, obj):
         return obj.get_country_display()
 
     class Meta:
         model = Lead
-        # fields = ‘__all__’
-        fields = (
-            "id",
-            "title",
-            "first_name",
-            "last_name",
-            "phone",
-            "email",
-            "status",
-            "source",
-            "address_line",
-            "contacts",
-            "street",
-            "city",
-            "state",
-            "postcode",
-            "country",
-            "website",
-            "description",
-            "lead_attachment",
-            "lead_comments",
-            "assigned_to",
-            "account_name",
-            "opportunity_amount",
-            "created_by",
-            "created_at",
-            "is_active",
-            "enquiry_type",
-            "tags",
-            "created_from_site",
-            "teams",
-            "skype_ID",
-            "industry",
-            "company",
-            "organization",
-            "probability",
-            "close_date",
-        )
-
+        fields = "__all__"
 
 class LeadCreateSerializer(serializers.ModelSerializer):
     probability = serializers.IntegerField(max_value=100)
