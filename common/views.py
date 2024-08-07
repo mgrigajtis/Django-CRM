@@ -922,7 +922,7 @@ class UserRegistrationView(APIView):
         print(request)
         try:
             test = User.objects.get(email=request.data["email"])
-            content = {'message': 'user already exists'}
+            content = {'message': 'user already exists', "status": 401}
             return Response(content)
         except User.DoesNotExist:
             user = User()
@@ -933,6 +933,7 @@ class UserRegistrationView(APIView):
             user.save()
         token = RefreshToken.for_user(user)  # generate token without username & password
         response = {}
+        response['status'] = 200
         response['username'] = user.email
         response['access_token'] = str(token.access_token)
         response['refresh_token'] = str(token)
@@ -954,16 +955,17 @@ class UserEmailLoginView(APIView):
             print(user.password)
             print(request.data["password"])
             if not check_password(request.data["password"], user.password):
-                content = {'message': 'wrong password'}
+                content = {'message': 'wrong password', "status" : 401}
                 return Response(content, status=status.HTTP_401_UNAUTHORIZED)
             else:
                 token = RefreshToken.for_user(user)
                 response = {}
+                response['status'] = 200
                 response['username'] = user.email
                 response['access_token'] = str(token.access_token)
                 response['refresh_token'] = str(token)
                 response['user_id'] = user.id
                 return Response(response)
         except User.DoesNotExist:
-            content = {'message': 'wrong username'}
+            content = {'message': 'wrong username',"status" : 401}
             return Response(response, status=status.HTTP_401_UNAUTHORIZED)
