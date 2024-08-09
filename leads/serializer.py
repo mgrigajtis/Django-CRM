@@ -11,7 +11,6 @@ from common.serializer import (
 )
 
 from leads.models import Company, Lead
-from teams.serializer import TeamsSerializer
 from tasks.serializer import TaskSerializer
 
 class TagsSerializer(serializers.ModelSerializer):
@@ -37,7 +36,6 @@ class LeadSerializer(serializers.ModelSerializer):
     country = serializers.SerializerMethodField()
     tags = TagsSerializer(read_only=True, many=True)
     lead_attachment = AttachmentsSerializer(read_only=True, many=True)
-    teams = TeamsSerializer(read_only=True, many=True)
     lead_comments = LeadCommentSerializer(read_only=True, many=True)
     tasks = TaskSerializer(read_only=True, many=True)
 
@@ -49,8 +47,6 @@ class LeadSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class LeadCreateSerializer(serializers.ModelSerializer):
-    probability = serializers.IntegerField(max_value=100)
-
     def __init__(self, *args, **kwargs):
         request_obj = kwargs.pop("request_obj", None)
         super().__init__(*args, **kwargs)
@@ -59,7 +55,7 @@ class LeadCreateSerializer(serializers.ModelSerializer):
             self.fields["email"].required = True
         self.fields["first_name"].required = False
         self.fields["last_name"].required = False
-        self.fields["title"].required = True
+        self.fields["title"].required = False
         self.org = request_obj.profile.org
 
         if self.instance:
@@ -73,73 +69,14 @@ class LeadCreateSerializer(serializers.ModelSerializer):
             data['status'] = data['status'].lower()
         return super().to_internal_value(data)
 
-    def validate_account_name(self, account_name):
-        if self.instance:
-            if (
-                Account.objects.filter(name__iexact=account_name, org=self.org)
-                .exclude(id=self.instance.id)
-                .exists()
-            ):
-                raise serializers.ValidationError(
-                    "Account already exists with this name"
-                )
-        else:
-            if Account.objects.filter(name__iexact=account_name, org=self.org).exists():
-                raise serializers.ValidationError(
-                    "Account already exists with this name"
-                )
-        return account_name
-
-    def validate_title(self, title):
-        if self.instance:
-            if (
-                Lead.objects.filter(title__iexact=title, org=self.org)
-                .exclude(id=self.instance.id)
-                .exists()
-            ):
-                raise serializers.ValidationError("Lead already exists with this title")
-        else:
-            if Lead.objects.filter(title__iexact=title, org=self.org).exists():
-                raise serializers.ValidationError("Lead already exists with this title")
-        return title
-
     class Meta:
         model = Lead
-        fields = (
-            "first_name",
-            "last_name",
-            "account_name",
-            "title",
-            "phone",
-            "email",
-            "status",
-            "source",
-            "website",
-            "description",
-            "address_line",
-            # "contacts",
-            "street",
-            "city",
-            "state",
-            "postcode",
-            "opportunity_amount",
-            "country",
-            "org",
-            "skype_ID",
-            "industry",
-            "company",
-            "organization",
-            "probability",
-            "close_date",
-            # "lead_attachment",
-        )
+        fields = "__all__"
 
 class LeadCreateSwaggerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lead
-        fields = ["title","first_name","last_name","account_name","phone","email","lead_attachment","opportunity_amount","website",
-                "description","teams","assigned_to","contacts","status","source","address_line","street","city","state","postcode",
-                "country","tags","company","probability","industry","skype_ID"]
+        fields = "__all__"
 
 
 class CreateLeadFromSiteSwaggerSerializer(serializers.Serializer):

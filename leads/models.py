@@ -31,9 +31,7 @@ class Company(BaseModel):
 
 
 class Lead(BaseModel):
-    title = models.CharField(
-        pgettext_lazy("Treatment Pronouns for the customer", "Title"), max_length=64
-    )
+    title = models.CharField(pgettext_lazy("Job Title", "Title"), max_length=64)
     first_name = models.CharField(_("First name"), null=True, max_length=255)
     last_name = models.CharField(_("Last name"), null=True, max_length=255)
     email = models.EmailField(null=True, blank=True)
@@ -53,8 +51,8 @@ class Lead(BaseModel):
     is_active = models.BooleanField(default=True)
     enquiry_type = models.CharField(max_length=255, blank=True, null=True)
     tags = models.ManyToManyField(Tags, blank=True)
-    teams = models.ManyToManyField(Teams, related_name="lead_teams")
-    tasks = models.ManyToManyField(Task, related_name="lead_tasks")
+    teams = models.ManyToManyField(Teams, related_name="lead_teams", blank=True)
+    tasks = models.ManyToManyField(Task, related_name="lead_tasks", blank=True)
     org = models.ForeignKey(Org, on_delete=models.SET_NULL, null=True, blank=True, related_name="lead_org")
     company = models.ForeignKey(
         Company,
@@ -109,12 +107,3 @@ class Lead(BaseModel):
         assigned_user_ids = list(self.assigned_to.values_list("id", flat=True))
         user_ids = set(assigned_user_ids) - set(team_user_ids)
         return Profile.objects.filter(id__in=list(user_ids))
-
-    # def save(self, *args, **kwargs):
-    #     super(Lead, self).save(*args, **kwargs)
-    #     queryset = Lead.objects.all().exclude(status='converted').select_related('created_by'
-    #         ).prefetch_related('tags', 'assigned_to',)
-    #     open_leads = queryset.exclude(status='closed')
-    #     close_leads = queryset.filter(status='closed')
-    #     cache.set('admin_leads_open_queryset', open_leads, 60*60)
-    #     cache.set('admin_leads_close_queryset', close_leads, 60*60)
