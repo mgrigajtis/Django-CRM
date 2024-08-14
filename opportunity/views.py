@@ -37,8 +37,6 @@ class OpportunityListView(APIView, LimitOffsetPagination):
     def get_context_data(self, **kwargs):
         params = self.request.query_params
         queryset = self.model.objects.filter(org=self.request.profile.org).order_by("-id")
-        accounts = Account.objects.filter(org=self.request.profile.org)
-        contacts = Contact.objects.filter(org=self.request.profile.org)
         if self.request.profile.role != "ADMIN" and not self.request.user.is_superuser:
             queryset = queryset.filter(
                 Q(created_by=self.request.profile.user) | Q(assigned_to=self.request.profile)
@@ -51,10 +49,10 @@ class OpportunityListView(APIView, LimitOffsetPagination):
             ).distinct()
 
         if params:
-            if params.get("name"):
-                queryset = queryset.filter(name__icontains=params.get("name"))
-            if params.get("account"):
-                queryset = queryset.filter(account=params.get("account"))
+            if params.get("first_name"):
+                queryset = queryset.filter(name__icontains=params.get("first_name"))
+            if params.get("last_name"):
+                queryset = queryset.filter(account=params.get("last_name"))
             if params.get("stage"):
                 queryset = queryset.filter(stage__contains=params.get("stage"))
             if params.get("lead_source"):
@@ -87,12 +85,9 @@ class OpportunityListView(APIView, LimitOffsetPagination):
             }
         )
         context["opportunities"] = opportunities
-        context["accounts_list"] = AccountSerializer(accounts, many=True).data
-        context["contacts_list"] = ContactSerializer(contacts, many=True).data
         context["tags"] = TagsSerailizer(Tags.objects.filter(), many=True).data
         context["stage"] = STAGES
         context["lead_source"] = SOURCES
-        context["currency"] = CURRENCY_CODES
 
         return context
 
@@ -117,11 +112,6 @@ class OpportunityListView(APIView, LimitOffsetPagination):
                 closed_on=params.get("due_date"),
                 org=request.profile.org,
             )
-
-            if params.get("contacts"):
-                contacts_list = params.get("contacts")
-                contacts = Contact.objects.filter(id__in=contacts_list, org=request.profile.org)
-                opportunity_obj.contacts.add(*contacts)
 
             if params.get("tags"):
                 tags = params.get("tags")
@@ -370,9 +360,6 @@ class OpportunityDetailView(APIView):
                 "attachments": AttachmentsSerializer(
                     self.opportunity.opportunity_attachment.all(), many=True
                 ).data,
-                "contacts": ContactSerializer(
-                    self.opportunity.contacts.all(), many=True
-                ).data,
                 "users": ProfileSerializer(
                     Profile.objects.filter(
                         is_active=True, org=self.request.profile.org
@@ -381,7 +368,6 @@ class OpportunityDetailView(APIView):
                 ).data,
                 "stage": STAGES,
                 "lead_source": SOURCES,
-                "currency": CURRENCY_CODES,
                 "comment_permission": comment_permission,
                 "users_mention": users_mention,
             }
