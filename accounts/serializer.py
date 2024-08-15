@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from accounts.models import Account, AccountEmail, Tags, AccountEmailLog
+from accounts.models import Account, AccountEmail, Tags, AccountEmailLog, RentersIntake, CommercialIntake
 from common.serializer import (
     AttachmentsSerializer,
     OrganizationSerializer,
@@ -36,6 +36,7 @@ class AccountSerializer(serializers.ModelSerializer):
             "name",
             "email",
             "phone",
+            "date_of_birth",
             "industry",
             "billing_address_line",
             "billing_street",
@@ -43,6 +44,12 @@ class AccountSerializer(serializers.ModelSerializer):
             "billing_state",
             "billing_postcode",
             "billing_country",
+            "previous_residency_address_line",
+            "previous_residency_street",
+            "previous_residency_city",
+            "previous_residency_state",
+            "previous_residency_postcode",
+            "previous_residency_country",
             "website",
             "description",
             "account_attachment",
@@ -154,6 +161,7 @@ class AccountCreateSerializer(serializers.ModelSerializer):
             "name",
             "phone",
             "email",
+            "date_of_birth",
             "website",
             "industry",
             "description",
@@ -164,6 +172,12 @@ class AccountCreateSerializer(serializers.ModelSerializer):
             "billing_state",
             "billing_postcode",
             "billing_country",
+            "previous_residency_address_line",
+            "previous_residency_street",
+            "previous_residency_city",
+            "previous_residency_state",
+            "previous_residency_postcode",
+            "previous_residency_country",
             "lead",
             "contact_name",
         )
@@ -179,3 +193,88 @@ class EmailWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccountEmail
         fields = ("from_email", "recipients", "message_subject","scheduled_later","timezone","scheduled_date_time","message_body")
+
+class RentersIntakeSerializer(serializers.ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        request_obj = kwargs.pop("request_obj", None)
+        super().__init__(*args, **kwargs)
+    class Meta:
+        model = RentersIntake
+        fields = (
+            "account",
+            "secondary_owner_name",
+            "secondary_owner_date_of_birth",
+            "secondary_owner_email",
+            "lease_start_date",
+            "limit_of_coverage_desired",
+            "has_dogs",
+            "number_of_dogs",
+            "dog_breeds",
+            "org"
+        )
+        extra_kwargs = {
+            'number_of_dogs': {'allow_null': True},
+        }
+
+    def validate(self, data):
+        if data.get('has_dogs') and data.get('number_of_dogs') is None:
+            raise serializers.ValidationError(
+                {"number_of_dogs": "This field is required if there are dogs."}
+            )
+        return data
+
+class RentersIntakeDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RentersIntake
+        fields = (
+            "account",
+            "secondary_owner_name",
+            "secondary_owner_date_of_birth",
+            "secondary_owner_email",
+            "lease_start_date",
+            "limit_of_coverage_desired",
+            "has_dogs",
+            "number_of_dogs",
+            "dog_breeds",
+            "org",
+            "id"
+        )
+
+
+class CommercialIntakeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommercialIntake
+        fields = (
+            "account",
+            "business_name",
+            "business_address_line_1",
+            "business_address_line_2",
+            "business_city",
+            "business_state",
+            "business_postal_code",
+            "business_mailing_address_line_1",
+            "business_mailing_address_line_2",
+            "business_mailing_city",
+            "business_mailing_state",
+            "business_mailing_postal_code",
+            "business_website",
+            "nature_of_business",
+            "business_type",
+            "coverage_requested",
+            "liability_limit_requested",
+            "number_of_owners",
+            "number_of_employees",
+            "employee_annual_payroll",
+            "annual_revenue",
+            "years_in_business",
+            "years_experience",
+            "number_of_contracted_employees",
+            "cost_of_contracted_employees",
+            "contractors_liability_required",
+            "additional_insured",
+            "current_insurance_company",
+            "effective_date",
+            "current_bodily_injury_limits",
+            "any_losses",
+            "org",
+        )

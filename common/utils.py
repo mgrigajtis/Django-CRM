@@ -622,3 +622,41 @@ def append_str_to(append_to: str, *args, sep=", ", **kwargs):
             data = True
             break
     return f"{sep}".join(filter(len, result_list)) if data else ""
+
+COMMERCIAL_INSURANCE_TYPES = (
+    ("General Liability Insurance", "General Liability Insurance"),
+    ("Commercial Property Insurance", "Commercial Property Insurance"),
+    ("Workers' Compensation Insurance", "Workers' Compensation Insurance"),
+    ("Commercial Auto Insurance", "Commercial Auto Insurance"),
+    ("Professional Liability Insurance (Errors & Omissions Insurance)", "Professional Liability Insurance (Errors & Omissions Insurance)"),
+    ("Business Owner's Policy (BOP)", "Business Owner's Policy (BOP)"),
+    ("Commercial Umbrella Insurance", "Commercial Umbrella Insurance"),
+    ("Cyber Liability Insurance", "Cyber Liability Insurance"),
+    ("Product Liability Insurance", "Product Liability Insurance"),
+    ("Inland Marine Insurance", "Inland Marine Insurance"),
+    ("Commercial Flood Insurance", "Commercial Flood Insurance"),
+    ("Commercial Crime Insurance", "Commercial Crime Insurance"),
+    ("Directors and Officers (D&O) Insurance", "Directors and Officers (D&O) Insurance"),
+    ("Employment Practices Liability Insurance (EPLI)", "Employment Practices Liability Insurance (EPLI)"),
+    ("Builder's Risk Insurance", "Builder's Risk Insurance"),
+)
+
+COMMERCIAL_LIABILITY_LIMITS = (
+    ("$2000000/$1000000", "$2000000/$1000000"),
+    ("$1000000/$500000", "$1000000/$500000"),
+    ("$500000/$500000", "$500000/$500000"),
+    ("$300000/$600000", "$300000/$600000"),
+    ("Other", "Other"),
+)
+
+
+BUSINESS_TYPES = (
+    ("Individual/Sole Proprietor", "Individual/Sole Proprietor"), 
+    ("Corporation", "Corporation"), 
+    ("Joint Venture", "Joint Venture"), 
+    ("Partnership", "Partnership"), 
+    ("LLC", "LLC"), 
+    ("Trust", "Trust"), 
+    ("S-Corp", "S-Corp"), 
+    ("Not For Profit", "Not For Profit")
+)

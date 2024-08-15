@@ -149,3 +149,64 @@
 2024-08-06 15:18:52.230 EDT [65000] LOG:  background worker "logical replication launcher" (PID 28816) exited with exit code 1
 2024-08-06 15:18:52.231 EDT [26688] LOG:  shutting down
 2024-08-06 15:18:52.255 EDT [65000] LOG:  database system is shut down
+2024-08-06 15:21:56.760 EDT [65876] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 15:21:56.763 EDT [65876] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 15:21:56.763 EDT [65876] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 15:21:56.805 EDT [46852] LOG:  database system was shut down at 2024-08-06 15:18:52 EDT
+2024-08-06 15:21:56.834 EDT [65876] LOG:  database system is ready to accept connections
+2024-08-10 16:35:55.829 EDT [29460] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-10 16:35:55.833 EDT [29460] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-10 16:35:55.833 EDT [29460] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-10 16:35:55.904 EDT [23100] LOG:  database system was interrupted; last known up at 2024-08-06 15:26:56 EDT
+2024-08-10 16:35:57.183 EDT [23100] LOG:  database system was not properly shut down; automatic recovery in progress
+2024-08-10 16:35:57.188 EDT [23100] LOG:  redo starts at 0/1C4EE00
+2024-08-10 16:35:57.188 EDT [23100] LOG:  invalid record length at 0/1C4EEE8: wanted 24, got 0
+2024-08-10 16:35:57.188 EDT [23100] LOG:  redo done at 0/1C4EEB0
+2024-08-10 16:35:57.243 EDT [29460] LOG:  database system is ready to accept connections
+2024-08-10 16:37:30.859 EDT [29460] LOG:  received fast shutdown request
+2024-08-10 16:37:30.860 EDT [29460] LOG:  aborting any active transactions
+2024-08-10 16:37:30.861 EDT [35028] FATAL:  terminating connection due to administrator command
+2024-08-10 16:37:30.863 EDT [30320] ERROR:  canceling statement due to user request
+2024-08-10 16:37:30.867 EDT [29460] LOG:  background worker "logical replication launcher" (PID 30320) exited with exit code 1
+2024-08-10 16:37:30.869 EDT [32756] LOG:  shutting down
+2024-08-10 16:37:30.901 EDT [29460] LOG:  database system is shut down
+2024-08-10 16:37:54.822 EDT [23808] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-10 16:37:54.826 EDT [23808] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-10 16:37:54.826 EDT [23808] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-10 16:37:54.877 EDT [34408] LOG:  database system was shut down at 2024-08-10 16:37:30 EDT
+2024-08-10 16:37:54.916 EDT [23808] LOG:  database system is ready to accept connections
+2024-08-14 07:56:44.559 EDT [23808] LOG:  server process (PID 19096) was terminated by exception 0x40010004
+2024-08-14 07:56:44.559 EDT [23808] DETAIL:  Failed process was running: 
+	        SELECT
+	            roles.oid as id, roles.rolname as name,
+	            roles.rolsuper as is_superuser,
+	            CASE WHEN roles.rolsuper THEN true ELSE roles.rolcreaterole END as
+	            can_create_role,
+	            CASE WHEN roles.rolsuper THEN true
+	            ELSE roles.rolcreatedb END as can_create_db,
+	            CASE WHEN 'pg_signal_backend'=ANY(ARRAY(WITH RECURSIVE cte AS (
+	            SELECT pg_roles.oid,pg_roles.rolname FROM pg_roles
+	                WHERE pg_roles.oid = roles.oid
+	            UNION ALL
+	            SELECT m.roleid,pgr.rolname FROM cte cte_1
+	                JOIN pg_auth_members m ON m.member = cte_1.oid
+	                JOIN pg_roles pgr ON pgr.oid = m.roleid)
+	            SELECT rolname  FROM cte)) THEN True
+	            ELSE False END as can_signal_backend
+	        FROM
+	            pg_catalog.pg_roles as roles
+	        WHERE
+	            rolname = current_user
+2024-08-14 07:56:44.559 EDT [23808] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2024-08-14 07:56:44.564 EDT [23808] LOG:  terminating any other active server processes
+2024-08-14 07:56:44.604 EDT [28460] WARNING:  terminating connection because of crash of another server process
+2024-08-14 07:56:44.604 EDT [28460] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2024-08-14 07:56:44.604 EDT [28460] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2024-08-14 07:56:44.625 EDT [35168] WARNING:  terminating connection because of crash of another server process
+2024-08-14 07:56:44.625 EDT [35168] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2024-08-14 07:56:44.625 EDT [35168] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2024-08-14 07:56:45.204 EDT [23808] LOG:  all server processes terminated; reinitializing
+2024-08-14 07:56:45.454 EDT [23808] LOG:  startup process (PID 26492) was terminated by exception 0xC000026B
+2024-08-14 07:56:45.454 EDT [23808] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2024-08-14 07:56:45.454 EDT [23808] LOG:  aborting startup due to startup process failure
+2024-08-14 07:56:45.458 EDT [23808] LOG:  database system is shut down

@@ -44,6 +44,7 @@ class GetProfileAndOrg(object):
         return self.get_response(request)
 
     def process_request(self, request):
+        print("executing middleware")
         try :
             request.profile = None
             user_id = None
@@ -65,6 +66,7 @@ class GetProfileAndOrg(object):
                     raise AuthenticationFailed('Invalid API Key')
             if user_id is not None:
                 if request.headers.get("org"):
+                    print(user_id)
                     profile = Profile.objects.get(
                         user_id=user_id, org=request.headers.get("org"), is_active=True
                     )

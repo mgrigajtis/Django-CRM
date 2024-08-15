@@ -89,3 +89,21 @@ class Opportunity(BaseModel):
         assigned_user_ids = list(self.assigned_to.values_list("id", flat=True))
         user_ids = set(assigned_user_ids) - set(team_user_ids)
         return Profile.objects.filter(id__in=list(user_ids))
+
+class RentersInsuranceIntake(BaseModel):
+    opportunity = models.ForeignKey(
+        Opportunity,
+        related_name="intake_forms",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )   
+
+    secondary_owner_name = models.CharField(max_length=255, blank=True, null=True)
+    secondary_owner_date_of_birth = models.DateField(null=True, blank=True)
+    secondary_owner_email = models.EmailField(max_length=255, blank=True, null=True)
+    lease_start_date = models.DateField(null=True, blank=True)
+    limit_of_coverage_desired = models.BooleanField(null=True, blank=True)
+    has_dogs = models.BooleanField()
+    number_of_dogs = models.IntegerField(null=True, blank=True)
+    dog_breeds = models.CharField(max_length=255, blank=True, null=True)

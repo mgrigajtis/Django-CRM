@@ -14,7 +14,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 
 from accounts import swagger_params1
-from accounts.models import Account, Tags
+from accounts.models import Account, Tags, RentersIntake, CommercialIntake
 from accounts.serializer import (
     AccountCreateSerializer,
     AccountSerializer,
@@ -24,7 +24,10 @@ from accounts.serializer import (
     AccountWriteSerializer,
     AccountDetailEditSwaggerSerializer,
     AccountCommentEditSwaggerSerializer,
-    EmailWriteSerializer
+    EmailWriteSerializer,
+    RentersIntakeSerializer,
+    CommercialIntakeSerializer,
+    RentersIntakeDetailsSerializer
 )
 from teams.serializer import TeamsSerializer
 from accounts.tasks import send_email, send_email_to_assigned_user
@@ -157,6 +160,7 @@ class AccountsListView(APIView, LimitOffsetPagination):
         serializer = AccountCreateSerializer(
             data=data, request_obj=request, account=True
         )
+        print(data)
         # Save Account
         if serializer.is_valid():
             account_object = serializer.save(
@@ -385,6 +389,8 @@ class AccountDetailView(APIView):
         leads = Lead.objects.filter(org=self.request.profile.org).exclude(
             Q(status="converted") | Q(status="closed")
         )
+        # Order by created_at to maintain position consistency
+        intake_forms = RentersIntake.objects.filter(account=self.account).order_by('created_at')
         context.update(
             {
                 "attachments": AttachmentsSerializer(
@@ -430,7 +436,8 @@ class AccountDetailView(APIView):
                 ).data,
                 "users_mention": users_mention,
                "leads" : LeadSerializer(leads, many=True).data,
-               "status" : ["open","close"]
+               "status" : ["open","close"],
+               "intake_forms": RentersIntakeDetailsSerializer(intake_forms, many=True).data
             }
         )
         return Response(context)
@@ -628,6 +635,52 @@ class AccountCreateMailView(APIView):
                 email_obj.scheduled_date_time = scheduled_date_time
             return Response(
                 {"error": False, "message": "Email sent successfully"},
+                status=status.HTTP_200_OK,
+            )
+        return Response(
+            {"error": True, "errors": serializer.errors},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+class RentersIntakeView(APIView):
+    permission_classes = (IsAuthenticated,)
+    model = RentersIntake
+    @extend_schema(request=RentersIntakeSerializer)
+    def post(self, request, *args, **kwargs):
+        print("entered the post method")
+        params = request.data
+        print("request data: ", params)
+        serializer = RentersIntakeSerializer(data=params, request_obj=request)
+        if serializer.is_valid():
+            renters_intake_obj = serializer.save(
+                created_by=request.profile.user,
+                org=request.profile.org,
+            )
+            print(renters_intake_obj)
+            return Response(
+                {"error": False, "message": "Renters intake form added successfully"},
+                status=status.HTTP_200_OK,
+            )
+        return Response(
+            {"error": True, "errors": serializer.errors},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+class CommercialIntakeView(APIView):
+    permission_classes = (IsAuthenticated,)
+    model = CommercialIntake
+    @extend_schema(request=CommercialIntakeSerializer)
+    def post(self, request, *args, **kwargs):
+        params = request.data
+        serializer = CommercialIntakeSerializer(data=params, request_obj=request)
+        if serializer.is_valid():
+            commercial_intake_obj = serializer.save(
+                created_by=request.profile.user,
+                org=request.profile.org,
+            )
+            print(commercial_intake_obj)
+            return Response(
+                {"error": False, "message": "Commercial intake form added successfully"},
                 status=status.HTTP_200_OK,
             )
         return Response(

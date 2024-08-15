@@ -4,6 +4,8 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext_lazy
 from phonenumber_field.modelfields import PhoneNumberField
+from multiselectfield import MultiSelectField
+from common.utils import SOURCES, STAGES, BUSINESS_TYPES, COMMERCIAL_INSURANCE_TYPES, COMMERCIAL_LIABILITY_LIMITS
 
 from common import utils
 from common.models import Org, Profile, CustomPhoneNumberField
@@ -40,6 +42,8 @@ class Account(BaseModel):
     name = models.CharField(pgettext_lazy("Name of Account", "Name"), max_length=64)
     email = models.EmailField()
     phone = CustomPhoneNumberField(null=True, blank=True)
+    date_of_birth = models.DateField()
+
     industry = models.CharField(
         _("Industry Type"), max_length=255, choices=INDCHOICES, blank=True, null=True
     )
@@ -57,6 +61,19 @@ class Account(BaseModel):
         _("Post/Zip-code"), max_length=64, blank=True, null=True
     )
     billing_country = models.CharField(
+        max_length=3, choices=COUNTRIES, blank=True, null=True
+    )
+
+    previous_residency_address_line = models.CharField(
+        _("Previous Address"), max_length=255, blank=True, null=True
+    )
+    previous_residency_street = models.CharField(_("Previous Street"), max_length=55, blank=True, null=True)
+    previous_residency_city = models.CharField(_("Previous City"), max_length=255, blank=True, null=True)
+    previous_residency_state = models.CharField(_("Previous State"), max_length=255, blank=True, null=True)
+    previous_residency_postcode = models.CharField(
+        _("Previous Post/Zip-code"), max_length=64, blank=True, null=True
+    )
+    previous_residency_country = models.CharField(
         max_length=3, choices=COUNTRIES, blank=True, null=True
     )
     website = models.URLField(_("Website"), blank=True, null=True)
@@ -181,3 +198,77 @@ class AccountEmailLog(BaseModel):
 
     def __str__(self):
         return f"{self.email.message_subject}"
+
+class RentersIntake(BaseModel):
+    account = models.ForeignKey(
+        Account,
+        related_name="renters_intake_accoumt",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )   
+    secondary_owner_name = models.CharField(max_length=255, blank=True, null=True)
+    secondary_owner_date_of_birth = models.DateField(null=True, blank=True)
+    secondary_owner_email = models.EmailField(max_length=255, blank=True, null=True)
+    lease_start_date = models.DateField(null=True, blank=True)
+    limit_of_coverage_desired = models.BooleanField(null=True, blank=True)
+    has_dogs = models.BooleanField()
+    number_of_dogs = models.IntegerField(null=True, blank=True)
+    dog_breeds = models.CharField(max_length=255, blank=True, null=True)
+    org = models.ForeignKey(
+        Org,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="renters_intake_org",
+    )
+
+class CommercialIntake(BaseModel):
+    account = models.ForeignKey(
+        Account,
+        related_name="commercial_intake_account",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )   
+    business_name = models.CharField(_("Business Name"), null=False, blank=False, max_length=255)
+    business_address_line_1 = models.CharField(_("Business Address Line 1"), null=False, blank=False, max_length=255)
+    business_address_line_2 = models.CharField(_("Business Address Line 2"), null=True, blank=True, max_length=255)
+    business_city = models.CharField(_("Business City"), null=False, blank=False, max_length=255)
+    business_state = models.CharField(_("Business State"), null=False, blank=False, max_length=255)
+    business_postal_code = models.CharField(_("Business Postal Code"), null=False, blank=False, max_length=10)
+    business_mailing_address_line_1 = models.CharField(_("Business Mailing Address Line 1"), null=False, blank=False, max_length=255)
+    business_mailing_address_line_2 = models.CharField(_("Business Mailing Address Line 2"), null=True, blank=True, max_length=255)
+    business_mailing_city = models.CharField(_("Business Mailing City"), null=False, blank=False, max_length=255)
+    business_mailing_state = models.CharField(_("Business Mailing State"), null=False, blank=False, max_length=255)
+    business_mailing_postal_code = models.CharField(_("Business Mailing Postal Code"), null=False, blank=False, max_length=10)
+    business_website = models.CharField(_("Business Website"), null=True, blank=True, max_length=255)
+    nature_of_business = models.CharField(_("Nature of Business\\Services Offered"), null=True, blank=True, max_length=255)
+    business_type = models.CharField(
+        pgettext_lazy("Type of Business", "Type of Business"), max_length=64, choices=BUSINESS_TYPES
+    )
+    coverage_requested = MultiSelectField(choices=COMMERCIAL_INSURANCE_TYPES)
+    liability_limit_requested = models.CharField(
+        pgettext_lazy("Liability Limits Requested", "Liability Limits Requested"), max_length=64, choices=COMMERCIAL_LIABILITY_LIMITS
+    )
+    number_of_owners = models.IntegerField(_("Number of Owners"), null=False, blank=False)
+    number_of_employees = models.IntegerField(_("Number of Employees"), null=False, blank=False)
+    employee_annual_payroll = models.BigIntegerField(_("Employee Annual Payroll"), null=False, blank=False)
+    annual_revenue = models.BigIntegerField(_("Annual Revenue"), null=False, blank=False)
+    years_in_business = models.IntegerField(_("Years in Business"), null=False, blank=False)
+    years_experience = models.IntegerField(_("Years Experience"), null=False, blank=False)
+    number_of_contracted_employees = models.IntegerField(_("Number of Contracted Employees"), null=False, blank=False)
+    cost_of_contracted_employees = models.IntegerField(_("Cost of Contracted Employees"), null=False, blank=False)
+    contractors_liability_required = models.BooleanField(_("Is Contractor Liability Coverage Required?"), null=False, blank=False, default=False)
+    additional_insured = models.CharField(_("Additional Insured"), null=True, blank=True, max_length=255)
+    current_insurance_company = models.CharField(_("Current Insurance Company"), null=True, blank=True, max_length=255)
+    effective_date = models.DateField(_("Effective Date"), null=True, blank=True)
+    current_bodily_injury_limits = models.CharField(_("Current Bodily Injury Limits"), null=True, blank=True, max_length=255)
+    any_losses = models.BooleanField(_("Any Losses?"), null=False, blank=False, default=False)
+    org = models.ForeignKey(
+        Org,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="commercial_intake_org",
+    )
