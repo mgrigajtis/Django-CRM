@@ -242,6 +242,9 @@ class RentersIntakeDetailsSerializer(serializers.ModelSerializer):
 
 
 class CommercialIntakeSerializer(serializers.ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        request_obj = kwargs.pop("request_obj", None)
+        super().__init__(*args, **kwargs)
     class Meta:
         model = CommercialIntake
         fields = (
@@ -277,4 +280,43 @@ class CommercialIntakeSerializer(serializers.ModelSerializer):
             "current_bodily_injury_limits",
             "any_losses",
             "org",
+        )
+
+class CommercialIntakeDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommercialIntake
+        fields = (
+            "account",
+            "business_name",
+            "business_address_line_1",
+            "business_address_line_2",
+            "business_city",
+            "business_state",
+            "business_postal_code",
+            "business_mailing_address_line_1",
+            "business_mailing_address_line_2",
+            "business_mailing_city",
+            "business_mailing_state",
+            "business_mailing_postal_code",
+            "business_website",
+            "nature_of_business",
+            "business_type",
+            "coverage_requested",
+            "liability_limit_requested",
+            "number_of_owners",
+            "number_of_employees",
+            "employee_annual_payroll",
+            "annual_revenue",
+            "years_in_business",
+            "years_experience",
+            "number_of_contracted_employees",
+            "cost_of_contracted_employees",
+            "contractors_liability_required",
+            "additional_insured",
+            "current_insurance_company",
+            "effective_date",
+            "current_bodily_injury_limits",
+            "any_losses",
+            "org",
+            "id"
         )

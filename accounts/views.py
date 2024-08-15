@@ -27,7 +27,8 @@ from accounts.serializer import (
     EmailWriteSerializer,
     RentersIntakeSerializer,
     CommercialIntakeSerializer,
-    RentersIntakeDetailsSerializer
+    RentersIntakeDetailsSerializer,
+    CommercialIntakeDetailsSerializer
 )
 from teams.serializer import TeamsSerializer
 from accounts.tasks import send_email, send_email_to_assigned_user
@@ -390,7 +391,8 @@ class AccountDetailView(APIView):
             Q(status="converted") | Q(status="closed")
         )
         # Order by created_at to maintain position consistency
-        intake_forms = RentersIntake.objects.filter(account=self.account).order_by('created_at')
+        renters_intake_forms = RentersIntake.objects.filter(account=self.account).order_by('created_at')
+        commercial_intake_forms = CommercialIntake.objects.filter(account=self.account).order_by('created_at')
         context.update(
             {
                 "attachments": AttachmentsSerializer(
@@ -437,7 +439,8 @@ class AccountDetailView(APIView):
                 "users_mention": users_mention,
                "leads" : LeadSerializer(leads, many=True).data,
                "status" : ["open","close"],
-               "intake_forms": RentersIntakeDetailsSerializer(intake_forms, many=True).data
+               "renters_intake_forms": RentersIntakeDetailsSerializer(renters_intake_forms, many=True).data,
+               "commercial_intake_forms": CommercialIntakeDetailsSerializer(commercial_intake_forms, many=True).data
             }
         )
         return Response(context)
@@ -647,9 +650,7 @@ class RentersIntakeView(APIView):
     model = RentersIntake
     @extend_schema(request=RentersIntakeSerializer)
     def post(self, request, *args, **kwargs):
-        print("entered the post method")
         params = request.data
-        print("request data: ", params)
         serializer = RentersIntakeSerializer(data=params, request_obj=request)
         if serializer.is_valid():
             renters_intake_obj = serializer.save(
