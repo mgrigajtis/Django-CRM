@@ -105,6 +105,14 @@ class Account(BaseModel):
         related_name="account_org",
     )
 
+    driver_liscence_number = models.CharField(max_length=255, blank=True, null=True)
+
+    married = models.BooleanField(default=False)
+    violations = models.BooleanField(default=False)
+    rated_driver_or_excluded = models.CharField(max_length=255, blank=True, null=True)
+    occupation = models.CharField(max_length=255, blank=True, null=True)
+    current_insurance_company = models.CharField(max_length=255, blank=True, null=True)
+
     class Meta:
         verbose_name = "Account"
         verbose_name_plural = "Accounts"
@@ -271,4 +279,46 @@ class CommercialIntake(BaseModel):
         null=True,
         blank=True,
         related_name="commercial_intake_org",
+    )
+
+class AutoIntake(BaseModel): 
+    VIN = models.CharField(_("VIN"), null=False, blank=False, max_length=255)
+    model_year = models.IntegerField(_("Car Model Year"), null=False, blank=False)
+    make  = models.CharField(_("Car Make"), null=True, blank=True, max_length=255)
+    model = models.CharField(_("Car Model"), null=False, blank=False, max_length=255)
+    liability_coverage = models.BooleanField(_("Liability Coverage"), null=False, blank=False)
+    collision_coverage = models.BooleanField(_("Collision Coverage"), null=False, blank=False)
+    comprehensive_coverage = models.BooleanField(_("Comprehensive Coverage"), null=False, blank=False)
+    personal_injury_protection_pip = models.BooleanField(_("Personal Injury Protection (PIP)"), null=False, blank=False)
+    medical_payments = models.BooleanField(_("Medical Payments"), null=False, blank=False)
+    uninsured_underinsured_motorist_coverage = models.BooleanField(_("Uninsured/Underinsured Motorist Coverage"), null=False, blank=False)
+    rental_reimbursement_coverage = models.BooleanField(_("Rental Reimbursement Coverage"), null=False, blank=False)
+    roadside_assistance = models.BooleanField(_("Roadside Assistance"), null=False, blank=False)
+    gap_insurance = models.BooleanField(_("Gap Insurance"), null=False, blank=False)
+    custom_parts_and_equipment_coverage = models.BooleanField(_("Custom Parts and Equipment Coverage"), null=False, blank=False)
+    accident_forgiveness = models.BooleanField(_("Accident Forgiveness"), null=False, blank=False)
+    new_car_replacement = models.BooleanField(_("New Car Replacement"), null=False, blank=False)
+    loss_of_use = models.BooleanField(_("Loss of Use"), null=False, blank=False)
+    org = models.ForeignKey(
+        Org,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="auto_intake_org",
+    )
+
+class Driver(BaseModel):
+    account = models.ForeignKey(
+        Account,
+        related_name="auto_intake_driver",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+    auto_intake = models.ForeignKey(
+        AutoIntake,
+        related_name="account_auto_driver",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )

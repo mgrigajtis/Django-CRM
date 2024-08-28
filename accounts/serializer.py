@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from accounts.models import Account, AccountEmail, Tags, AccountEmailLog, RentersIntake, CommercialIntake
+from accounts.models import Account, AccountEmail, Tags, AccountEmailLog, RentersIntake, CommercialIntake, Driver, AutoIntake
 from common.serializer import (
     AttachmentsSerializer,
     OrganizationSerializer,
@@ -63,6 +63,13 @@ class AccountSerializer(serializers.ModelSerializer):
             "contacts",
             "assigned_to",
             "teams",
+            "contact_name",
+            "driver_liscence_number",
+            "married",
+            "violations",
+            "rated_driver_or_excluded",
+            "occupation",
+            "current_insurance_company",
             "org",
         )
 
@@ -180,6 +187,12 @@ class AccountCreateSerializer(serializers.ModelSerializer):
             "previous_residency_country",
             "lead",
             "contact_name",
+            "driver_liscence_number",
+            "married",
+            "violations",
+            "rated_driver_or_excluded",
+            "occupation",
+            "current_insurance_company",
         )
 
 class AccountDetailEditSwaggerSerializer(serializers.Serializer):
@@ -320,3 +333,73 @@ class CommercialIntakeDetailsSerializer(serializers.ModelSerializer):
             "org",
             "id"
         )
+
+class AutoIntakeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AutoIntake
+        fields = [
+            'VIN', 'model_year', 'make', 'model', 'liability_coverage',
+            'collision_coverage', 'comprehensive_coverage',
+            'personal_injury_protection_pip', 'medical_payments',
+            'uninsured_underinsured_motorist_coverage', 'rental_reimbursement_coverage',
+            'roadside_assistance', 'gap_insurance', 'custom_parts_and_equipment_coverage',
+            'accident_forgiveness', 'new_car_replacement', 'loss_of_use', 'org'
+        ]
+
+class AutoIntakeDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AutoIntake
+        fields = [
+            'VIN', 'model_year', 'make', 'model', 'liability_coverage',
+            'collision_coverage', 'comprehensive_coverage',
+            'personal_injury_protection_pip', 'medical_payments',
+            'uninsured_underinsured_motorist_coverage', 'rental_reimbursement_coverage',
+            'roadside_assistance', 'gap_insurance', 'custom_parts_and_equipment_coverage',
+            'accident_forgiveness', 'new_car_replacement', 'loss_of_use', 'org', 'id'
+        ]
+
+class AutoIntakeField(serializers.RelatedField):
+    def to_internal_value(self, data):
+        if isinstance(data, int):
+            try:
+                return AutoIntake.objects.get(pk=data)
+            except AutoIntake.DoesNotExist:
+                raise serializers.ValidationError("AutoIntake with this ID does not exist.")
+        elif isinstance(data, dict):
+            # Assuming you already have an AutoIntakeSerializer defined
+            serializer = AutoIntakeSerializer(data=data)
+            serializer.is_valid(raise_exception=True)
+            return serializer.save()
+        else:
+            raise serializers.ValidationError("Invalid data type for auto_intake.")
+
+    def to_representation(self, value):
+        # Use the AutoIntakeSerializer for representation
+        serializer = AutoIntakeSerializer(value)
+        return serializer.data
+
+class DriverSerializer(serializers.ModelSerializer):
+    auto_intake = AutoIntakeField(queryset=AutoIntake.objects.all())
+    def __init__(self, *args, **kwargs):
+        print(kwargs) 
+        request_obj = kwargs.pop("request_obj", None)
+        super().__init__(*args, **kwargs)
+    class Meta:
+        model = Driver
+        fields = ['account', 'auto_intake']
+
+    def create(self, validated_data):
+        driver = Driver.objects.create(**validated_data)
+        return driver
+
+    def update(self, instance, validated_data):
+        instance.auto_intake = validated_data.get('auto_intake', instance.auto_intake)
+        instance.account = validated_data.get('account', instance.account)
+        instance.save()
+        return instance
+    
+class DriverDetailsSerializer(serializers.ModelSerializer):
+    auto_intake = AutoIntakeDetailsSerializer()
+    class Meta:
+        model = Driver
+        fields = ['account', 'auto_intake', 'id']

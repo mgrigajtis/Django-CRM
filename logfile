@@ -236,3 +236,34 @@
 2024-08-14 11:44:43.985 EDT [11056] STATEMENT:  INSERT INTO "accounts" ("created_at", "updated_at", "created_by_id", "updated_by_id", "id", "name", "email", "phone", "date_of_birth", "industry", "billing_address_line", "billing_street", "billing_city", "billing_state", "billing_postcode", "billing_country", "previous_residency_address_line", "previous_residency_street", "previous_residency_city", "previous_residency_state", "previous_residency_postcode", "previous_billing_country", "website", "description", "is_active", "status", "lead_id", "contact_name", "org_id") VALUES ('2024-08-14T15:44:43.984535+00:00'::timestamptz, '2024-08-14T15:44:43.984535+00:00'::timestamptz, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, 'dc68bd7f-47a9-48db-bf64-bf4844571183'::uuid, 'Marko Customer', 'sometest@gmail.com', '3213453212', NULL, NULL, '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, false, 'open', NULL, 'fasdfa', 'dfa4be1d-ae0c-4924-99b9-9133be94b7ce'::uuid)
 2024-08-14 11:49:59.669 EDT [424] ERROR:  column "previous_residency_country" of relation "accounts" does not exist
 2024-08-14 11:49:59.669 EDT [424] STATEMENT:  ALTER TABLE "accounts" DROP COLUMN "previous_residency_country" CASCADE
+2024-08-20 09:34:41.144 EDT [25268] LOG:  received fast shutdown request
+2024-08-20 09:34:41.147 EDT [25268] LOG:  aborting any active transactions
+2024-08-20 09:34:41.150 EDT [26164] ERROR:  canceling statement due to user request
+2024-08-20 09:34:41.150 EDT [34812] FATAL:  terminating connection due to administrator command
+2024-08-20 09:34:41.150 EDT [48008] FATAL:  terminating connection due to administrator command
+2024-08-20 09:34:41.150 EDT [16324] FATAL:  terminating connection due to administrator command
+2024-08-20 09:34:41.163 EDT [25268] LOG:  background worker "logical replication launcher" (PID 26164) exited with exit code 1
+2024-08-20 09:34:41.180 EDT [23548] LOG:  shutting down
+2024-08-20 09:34:41.221 EDT [25268] LOG:  database system is shut down
+2024-08-23 16:12:11.914 EDT [17608] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-23 16:12:11.918 EDT [17608] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-23 16:12:11.918 EDT [17608] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-23 16:12:11.991 EDT [43496] LOG:  database system was shut down at 2024-08-20 09:34:41 EDT
+2024-08-23 16:12:12.040 EDT [17608] LOG:  database system is ready to accept connections
+2024-08-25 12:34:37.006 EDT [45600] FATAL:  terminating connection due to unexpected postmaster exit
+2024-08-27 14:34:25.004 EDT [5472] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-27 14:34:25.007 EDT [5472] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-27 14:34:25.007 EDT [5472] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-27 14:34:25.086 EDT [35416] LOG:  database system was interrupted; last known up at 2024-08-23 16:17:12 EDT
+2024-08-27 14:34:25.882 EDT [35416] LOG:  database system was not properly shut down; automatic recovery in progress
+2024-08-27 14:34:25.885 EDT [35416] LOG:  redo starts at 0/1E042F8
+2024-08-27 14:34:25.885 EDT [35416] LOG:  invalid record length at 0/1E043E0: wanted 24, got 0
+2024-08-27 14:34:25.885 EDT [35416] LOG:  redo done at 0/1E043A8
+2024-08-27 14:34:25.923 EDT [5472] LOG:  database system is ready to accept connections
+2024-08-28 10:54:05.138 EDT [5472] LOG:  received fast shutdown request
+2024-08-28 10:54:05.140 EDT [5472] LOG:  aborting any active transactions
+2024-08-28 10:54:05.143 EDT [36188] FATAL:  terminating connection due to administrator command
+2024-08-28 10:54:05.144 EDT [33892] ERROR:  canceling statement due to user request
+2024-08-28 10:54:05.150 EDT [5472] LOG:  background worker "logical replication launcher" (PID 33892) exited with exit code 1
+2024-08-28 10:54:05.153 EDT [31788] LOG:  shutting down
+2024-08-28 10:54:05.178 EDT [5472] LOG:  database system is shut down

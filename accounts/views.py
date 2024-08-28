@@ -14,10 +14,12 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 
 from accounts import swagger_params1
-from accounts.models import Account, Tags, RentersIntake, CommercialIntake
+from accounts.models import Account, Tags, RentersIntake, CommercialIntake, Driver
 from accounts.serializer import (
     AccountCreateSerializer,
     AccountSerializer,
+    AutoIntakeDetailsSerializer,
+    DriverDetailsSerializer,
     EmailSerializer,
     TagsSerailizer,
     AccountReadSerializer,
@@ -28,7 +30,8 @@ from accounts.serializer import (
     RentersIntakeSerializer,
     CommercialIntakeSerializer,
     RentersIntakeDetailsSerializer,
-    CommercialIntakeDetailsSerializer
+    CommercialIntakeDetailsSerializer,
+    DriverSerializer
 )
 from teams.serializer import TeamsSerializer
 from accounts.tasks import send_email, send_email_to_assigned_user
@@ -240,7 +243,9 @@ class AccountDetailView(APIView):
             account_object, data=data, request_obj=request, account=True
         )
 
+        print("dont know")
         if serializer.is_valid():
+            print("valid know")
             if (
                 self.request.profile.role != "ADMIN"
                 and not self.request.profile.is_admin
@@ -393,6 +398,7 @@ class AccountDetailView(APIView):
         # Order by created_at to maintain position consistency
         renters_intake_forms = RentersIntake.objects.filter(account=self.account).order_by('created_at')
         commercial_intake_forms = CommercialIntake.objects.filter(account=self.account).order_by('created_at')
+        auto_intake_forms = DriverDetailsSerializer(Driver.objects.filter(account=self.account).order_by('created_at'), many=True).data
         context.update(
             {
                 "attachments": AttachmentsSerializer(
@@ -440,7 +446,8 @@ class AccountDetailView(APIView):
                "leads" : LeadSerializer(leads, many=True).data,
                "status" : ["open","close"],
                "renters_intake_forms": RentersIntakeDetailsSerializer(renters_intake_forms, many=True).data,
-               "commercial_intake_forms": CommercialIntakeDetailsSerializer(commercial_intake_forms, many=True).data
+               "commercial_intake_forms": CommercialIntakeDetailsSerializer(commercial_intake_forms, many=True).data,
+               "auto_intake_forms": auto_intake_forms,
             }
         )
         return Response(context)
@@ -666,6 +673,40 @@ class RentersIntakeView(APIView):
             {"error": True, "errors": serializer.errors},
             status=status.HTTP_400_BAD_REQUEST,
         )
+    
+    def get(self, pk):
+        intake_object = self.get_object(pk=pk)
+        serializer = RentersIntakeDetailsSerializer(intake_object)
+        return Response(serializer.data)
+    
+    def put(self, request, pk, **kwargs):
+        params = request.data
+        intake_object = self.get_object(pk=pk)
+        if intake_object.org != request.profile.org:
+            return Response(
+                {"error": True, "errors": "User company doesnot match with header...."},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+        serializer = RentersIntakeSerializer(
+            intake_object,
+            data=params, 
+            request_obj=request
+        )
+
+        if serializer.is_valid():
+            renters_intake_obj = serializer.save(
+                created_by=request.profile.user,
+                org=request.profile.org,
+            )
+            print(renters_intake_obj)
+            return Response(
+                {"error": False, "message": "Renters intake form added successfully"},
+                status=status.HTTP_200_OK,
+            )
+        return Response(
+            {"error": True, "errors": serializer.errors},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
 class CommercialIntakeView(APIView):
     permission_classes = (IsAuthenticated,)
@@ -682,6 +723,27 @@ class CommercialIntakeView(APIView):
             print(commercial_intake_obj)
             return Response(
                 {"error": False, "message": "Commercial intake form added successfully"},
+                status=status.HTTP_200_OK,
+            )
+        return Response(
+            {"error": True, "errors": serializer.errors},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+class DriverView(APIView):
+    permission_classes = (IsAuthenticated,)
+    model = Driver
+    @extend_schema(request=Driver)
+    def post(self, request, *args, **kwargs):
+        params = request.data
+        serializer = DriverSerializer(data=params, request_obj=request)
+        if serializer.is_valid():
+            driver_intake_obj = serializer.save(
+                created_by=request.profile.user,
+            )
+            print(driver_intake_obj)
+            return Response(
+                {"error": False, "message": "Auto intake form added successfully"},
                 status=status.HTTP_200_OK,
             )
         return Response(
