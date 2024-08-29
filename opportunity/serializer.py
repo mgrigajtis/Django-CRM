@@ -34,7 +34,6 @@ class OpportunitySerializer(serializers.ModelSerializer):
             "currency",
             "amount",
             "lead_source",
-            "probability",
             "contacts",
             "closed_by",
             "closed_on",
@@ -55,7 +54,6 @@ class OpportunitySerializer(serializers.ModelSerializer):
 
 
 class OpportunityCreateSerializer(serializers.ModelSerializer):
-    probability = serializers.IntegerField(max_value=100)
     closed_on = serializers.DateField
 
     def __init__(self, *args, **kwargs):
@@ -90,7 +88,6 @@ class OpportunityCreateSerializer(serializers.ModelSerializer):
             "currency",
             "amount",
             "lead_source",
-            "probability",
             "closed_on",
             "description",
             "created_by",
@@ -116,7 +113,6 @@ class OpportunityCreateSwaggerSerializer(serializers.ModelSerializer):
             "stage",
             "teams",
             "lead_source",
-            "probability",
             "description",
             "assigned_to",
             "contacts",
