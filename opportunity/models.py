@@ -32,7 +32,6 @@ class Opportunity(BaseModel):
     lead_source = models.CharField(
         _("Source of Lead"), max_length=255, choices=SOURCES, blank=True, null=True
     )
-    probability = models.IntegerField(default=0, blank=True, null=True)
     contacts = models.ManyToManyField(Contact)
     closed_by = models.ForeignKey(
         Profile,

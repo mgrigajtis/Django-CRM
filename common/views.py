@@ -933,6 +933,7 @@ class UserRegistrationView(APIView):
             user.save()
         token = RefreshToken.for_user(user)  # generate token without username & password
         response = {}
+        response['status'] = 200
         response['username'] = user.email
         response['access_token'] = str(token.access_token)
         response['refresh_token'] = str(token)
@@ -960,6 +961,7 @@ class UserEmailLoginView(APIView):
             else:
                 token = RefreshToken.for_user(user)
                 response = {}
+                response['status'] = 200
                 response['username'] = user.email
                 response['access_token'] = str(token.access_token)
                 response['refresh_token'] = str(token)
@@ -967,5 +969,5 @@ class UserEmailLoginView(APIView):
                 response['status'] = 200
                 return Response(response)
         except User.DoesNotExist:
-            content = {'message': 'wrong username', "status": 401}
+            content = {'message': 'wrong username',"status" : 401}
             return Response(response, status=status.HTTP_401_UNAUTHORIZED)

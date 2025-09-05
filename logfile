@@ -44,6 +44,229 @@
 2024-08-02 16:53:38.685 EDT [35772] LOG:  background worker "logical replication launcher" (PID 38548) exited with exit code 1
 2024-08-02 16:53:38.691 EDT [24808] LOG:  shutting down
 2024-08-02 16:53:38.717 EDT [35772] LOG:  database system is shut down
+2024-08-06 09:28:25.642 EDT [1416] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 09:28:25.645 EDT [1416] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 09:28:25.645 EDT [1416] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 09:28:25.688 EDT [33384] LOG:  database system was shut down at 2024-08-06 09:27:21 EDT
+2024-08-06 09:28:25.724 EDT [1416] LOG:  database system is ready to accept connections
+2024-08-06 09:29:16.707 EDT [1416] LOG:  received fast shutdown request
+2024-08-06 09:29:16.708 EDT [1416] LOG:  aborting any active transactions
+2024-08-06 09:29:16.709 EDT [36892] FATAL:  terminating connection due to administrator command
+2024-08-06 09:29:16.710 EDT [23768] ERROR:  canceling statement due to user request
+2024-08-06 09:29:16.713 EDT [1416] LOG:  background worker "logical replication launcher" (PID 23768) exited with exit code 1
+2024-08-06 09:29:16.714 EDT [12688] LOG:  shutting down
+2024-08-06 09:29:16.737 EDT [1416] LOG:  database system is shut down
+2024-08-06 09:29:33.864 EDT [16848] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 09:29:33.867 EDT [16848] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 09:29:33.867 EDT [16848] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 09:29:33.902 EDT [31276] LOG:  database system was shut down at 2024-08-06 09:29:16 EDT
+2024-08-06 09:29:33.932 EDT [16848] LOG:  database system is ready to accept connections
+2024-08-06 09:29:39.228 EDT [16848] LOG:  received fast shutdown request
+2024-08-06 09:29:39.229 EDT [20924] ERROR:  canceling statement due to user request
+2024-08-06 09:29:39.238 EDT [16848] LOG:  aborting any active transactions
+2024-08-06 09:29:39.238 EDT [16848] LOG:  background worker "logical replication launcher" (PID 20924) exited with exit code 1
+2024-08-06 09:29:39.242 EDT [40540] LOG:  shutting down
+2024-08-06 09:29:39.264 EDT [16848] LOG:  database system is shut down
+2024-08-06 09:29:40.891 EDT [28276] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 09:29:40.893 EDT [28276] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 09:29:40.894 EDT [28276] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 09:29:40.930 EDT [27044] LOG:  database system was shut down at 2024-08-06 09:29:39 EDT
+2024-08-06 09:29:40.960 EDT [28276] LOG:  database system is ready to accept connections
+2024-08-06 09:55:43.486 EDT [28276] LOG:  received fast shutdown request
+2024-08-06 09:55:43.486 EDT [26656] ERROR:  canceling statement due to user request
+2024-08-06 09:55:43.490 EDT [28276] LOG:  aborting any active transactions
+2024-08-06 09:55:43.496 EDT [5356] FATAL:  terminating connection due to administrator command
+2024-08-06 09:55:43.498 EDT [28276] LOG:  background worker "logical replication launcher" (PID 26656) exited with exit code 1
+2024-08-06 09:55:43.510 EDT [42360] LOG:  shutting down
+2024-08-06 09:55:43.536 EDT [28276] LOG:  database system is shut down
+2024-08-06 09:55:48.686 EDT [2148] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 09:55:48.692 EDT [2148] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 09:55:48.692 EDT [2148] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 09:55:48.741 EDT [18068] LOG:  database system was shut down at 2024-08-06 09:55:43 EDT
+2024-08-06 09:55:48.782 EDT [2148] LOG:  database system is ready to accept connections
+2024-08-06 10:06:14.369 EDT [2148] LOG:  received fast shutdown request
+2024-08-06 10:06:14.369 EDT [2916] ERROR:  canceling statement due to user request
+2024-08-06 10:06:14.379 EDT [2148] LOG:  aborting any active transactions
+2024-08-06 10:06:14.380 EDT [27200] FATAL:  terminating connection due to administrator command
+2024-08-06 10:06:14.393 EDT [2148] LOG:  background worker "logical replication launcher" (PID 2916) exited with exit code 1
+2024-08-06 10:06:14.397 EDT [38188] LOG:  shutting down
+2024-08-06 10:06:14.447 EDT [2148] LOG:  database system is shut down
+2024-08-06 10:13:30.906 EDT [38944] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 10:13:30.910 EDT [38944] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 10:13:30.910 EDT [38944] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 10:13:30.960 EDT [19096] LOG:  database system was shut down at 2024-08-06 10:06:14 EDT
+2024-08-06 10:13:31.001 EDT [38944] LOG:  database system is ready to accept connections
+2024-08-06 10:13:33.896 EDT [38944] LOG:  received fast shutdown request
+2024-08-06 10:13:33.898 EDT [38944] LOG:  aborting any active transactions
+2024-08-06 10:13:33.899 EDT [2756] ERROR:  canceling statement due to user request
+2024-08-06 10:13:33.903 EDT [38944] LOG:  background worker "logical replication launcher" (PID 2756) exited with exit code 1
+2024-08-06 10:13:33.903 EDT [11296] LOG:  shutting down
+2024-08-06 10:13:33.930 EDT [38944] LOG:  database system is shut down
+2024-08-06 10:13:56.362 EDT [29212] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 10:13:56.366 EDT [29212] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 10:13:56.366 EDT [29212] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 10:13:56.411 EDT [34052] LOG:  database system was shut down at 2024-08-06 10:13:33 EDT
+2024-08-06 10:13:56.460 EDT [29212] LOG:  database system is ready to accept connections
+2024-08-06 10:13:59.304 EDT [29212] LOG:  received fast shutdown request
+2024-08-06 10:13:59.304 EDT [34580] ERROR:  canceling statement due to user request
+2024-08-06 10:13:59.305 EDT [29212] LOG:  aborting any active transactions
+2024-08-06 10:13:59.308 EDT [29212] LOG:  background worker "logical replication launcher" (PID 34580) exited with exit code 1
+2024-08-06 10:13:59.313 EDT [33172] LOG:  shutting down
+2024-08-06 10:13:59.342 EDT [29212] LOG:  database system is shut down
+2024-08-06 10:14:07.784 EDT [34460] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 10:14:07.788 EDT [34460] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 10:14:07.788 EDT [34460] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 10:14:07.832 EDT [29960] LOG:  database system was shut down at 2024-08-06 10:13:59 EDT
+2024-08-06 10:14:07.867 EDT [34460] LOG:  database system is ready to accept connections
+2024-08-06 14:46:01.895 EDT [34460] LOG:  received fast shutdown request
+2024-08-06 14:46:01.898 EDT [34460] LOG:  aborting any active transactions
+2024-08-06 14:46:01.900 EDT [14320] FATAL:  terminating connection due to administrator command
+2024-08-06 14:46:01.900 EDT [24012] ERROR:  canceling statement due to user request
+2024-08-06 14:46:01.910 EDT [34460] LOG:  background worker "logical replication launcher" (PID 24012) exited with exit code 1
+2024-08-06 14:46:01.916 EDT [42040] LOG:  shutting down
+2024-08-06 14:46:01.945 EDT [34460] LOG:  database system is shut down
+2024-08-06 14:46:19.205 EDT [60464] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 14:46:19.209 EDT [60464] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 14:46:19.209 EDT [60464] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 14:46:19.258 EDT [17260] LOG:  database system was shut down at 2024-08-06 14:46:01 EDT
+2024-08-06 14:46:19.291 EDT [60464] LOG:  database system is ready to accept connections
+2024-08-06 14:51:29.689 EDT [60464] LOG:  received fast shutdown request
+2024-08-06 14:51:29.690 EDT [60464] LOG:  aborting any active transactions
+2024-08-06 14:51:29.690 EDT [64776] FATAL:  terminating connection due to administrator command
+2024-08-06 14:51:29.692 EDT [65184] ERROR:  canceling statement due to user request
+2024-08-06 14:51:29.696 EDT [60464] LOG:  background worker "logical replication launcher" (PID 65184) exited with exit code 1
+2024-08-06 14:51:29.696 EDT [15288] LOG:  shutting down
+2024-08-06 14:51:29.719 EDT [60464] LOG:  database system is shut down
+2024-08-06 14:52:14.736 EDT [65000] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 14:52:14.739 EDT [65000] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 14:52:14.739 EDT [65000] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 14:52:14.775 EDT [41568] LOG:  database system was shut down at 2024-08-06 14:51:29 EDT
+2024-08-06 14:52:14.803 EDT [65000] LOG:  database system is ready to accept connections
+2024-08-06 15:18:52.222 EDT [65000] LOG:  received fast shutdown request
+2024-08-06 15:18:52.224 EDT [65000] LOG:  aborting any active transactions
+2024-08-06 15:18:52.225 EDT [35772] FATAL:  terminating connection due to administrator command
+2024-08-06 15:18:52.226 EDT [28816] ERROR:  canceling statement due to user request
+2024-08-06 15:18:52.230 EDT [65000] LOG:  background worker "logical replication launcher" (PID 28816) exited with exit code 1
+2024-08-06 15:18:52.231 EDT [26688] LOG:  shutting down
+2024-08-06 15:18:52.255 EDT [65000] LOG:  database system is shut down
+2024-08-06 15:21:56.760 EDT [65876] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-06 15:21:56.763 EDT [65876] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-06 15:21:56.763 EDT [65876] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-06 15:21:56.805 EDT [46852] LOG:  database system was shut down at 2024-08-06 15:18:52 EDT
+2024-08-06 15:21:56.834 EDT [65876] LOG:  database system is ready to accept connections
+2024-08-10 16:35:55.829 EDT [29460] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-10 16:35:55.833 EDT [29460] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-10 16:35:55.833 EDT [29460] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-10 16:35:55.904 EDT [23100] LOG:  database system was interrupted; last known up at 2024-08-06 15:26:56 EDT
+2024-08-10 16:35:57.183 EDT [23100] LOG:  database system was not properly shut down; automatic recovery in progress
+2024-08-10 16:35:57.188 EDT [23100] LOG:  redo starts at 0/1C4EE00
+2024-08-10 16:35:57.188 EDT [23100] LOG:  invalid record length at 0/1C4EEE8: wanted 24, got 0
+2024-08-10 16:35:57.188 EDT [23100] LOG:  redo done at 0/1C4EEB0
+2024-08-10 16:35:57.243 EDT [29460] LOG:  database system is ready to accept connections
+2024-08-10 16:37:30.859 EDT [29460] LOG:  received fast shutdown request
+2024-08-10 16:37:30.860 EDT [29460] LOG:  aborting any active transactions
+2024-08-10 16:37:30.861 EDT [35028] FATAL:  terminating connection due to administrator command
+2024-08-10 16:37:30.863 EDT [30320] ERROR:  canceling statement due to user request
+2024-08-10 16:37:30.867 EDT [29460] LOG:  background worker "logical replication launcher" (PID 30320) exited with exit code 1
+2024-08-10 16:37:30.869 EDT [32756] LOG:  shutting down
+2024-08-10 16:37:30.901 EDT [29460] LOG:  database system is shut down
+2024-08-10 16:37:54.822 EDT [23808] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-10 16:37:54.826 EDT [23808] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-10 16:37:54.826 EDT [23808] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-10 16:37:54.877 EDT [34408] LOG:  database system was shut down at 2024-08-10 16:37:30 EDT
+2024-08-10 16:37:54.916 EDT [23808] LOG:  database system is ready to accept connections
+2024-08-14 07:56:44.559 EDT [23808] LOG:  server process (PID 19096) was terminated by exception 0x40010004
+2024-08-14 07:56:44.559 EDT [23808] DETAIL:  Failed process was running: 
+	        SELECT
+	            roles.oid as id, roles.rolname as name,
+	            roles.rolsuper as is_superuser,
+	            CASE WHEN roles.rolsuper THEN true ELSE roles.rolcreaterole END as
+	            can_create_role,
+	            CASE WHEN roles.rolsuper THEN true
+	            ELSE roles.rolcreatedb END as can_create_db,
+	            CASE WHEN 'pg_signal_backend'=ANY(ARRAY(WITH RECURSIVE cte AS (
+	            SELECT pg_roles.oid,pg_roles.rolname FROM pg_roles
+	                WHERE pg_roles.oid = roles.oid
+	            UNION ALL
+	            SELECT m.roleid,pgr.rolname FROM cte cte_1
+	                JOIN pg_auth_members m ON m.member = cte_1.oid
+	                JOIN pg_roles pgr ON pgr.oid = m.roleid)
+	            SELECT rolname  FROM cte)) THEN True
+	            ELSE False END as can_signal_backend
+	        FROM
+	            pg_catalog.pg_roles as roles
+	        WHERE
+	            rolname = current_user
+2024-08-14 07:56:44.559 EDT [23808] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2024-08-14 07:56:44.564 EDT [23808] LOG:  terminating any other active server processes
+2024-08-14 07:56:44.604 EDT [28460] WARNING:  terminating connection because of crash of another server process
+2024-08-14 07:56:44.604 EDT [28460] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2024-08-14 07:56:44.604 EDT [28460] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2024-08-14 07:56:44.625 EDT [35168] WARNING:  terminating connection because of crash of another server process
+2024-08-14 07:56:44.625 EDT [35168] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2024-08-14 07:56:44.625 EDT [35168] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2024-08-14 07:56:45.204 EDT [23808] LOG:  all server processes terminated; reinitializing
+2024-08-14 07:56:45.454 EDT [23808] LOG:  startup process (PID 26492) was terminated by exception 0xC000026B
+2024-08-14 07:56:45.454 EDT [23808] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2024-08-14 07:56:45.454 EDT [23808] LOG:  aborting startup due to startup process failure
+2024-08-14 07:56:45.458 EDT [23808] LOG:  database system is shut down
+2024-08-14 08:58:09.969 EDT [25268] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-14 08:58:09.972 EDT [25268] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-14 08:58:09.972 EDT [25268] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-14 08:58:10.034 EDT [16012] LOG:  database system was interrupted; last known up at 2024-08-10 16:47:58 EDT
+2024-08-14 08:58:10.807 EDT [16012] LOG:  database system was not properly shut down; automatic recovery in progress
+2024-08-14 08:58:10.810 EDT [16012] LOG:  redo starts at 0/1CCAD68
+2024-08-14 08:58:10.810 EDT [16012] LOG:  invalid record length at 0/1CCAE50: wanted 24, got 0
+2024-08-14 08:58:10.810 EDT [16012] LOG:  redo done at 0/1CCAE18
+2024-08-14 08:58:10.847 EDT [25268] LOG:  database system is ready to accept connections
+2024-08-14 11:39:35.657 EDT [10260] ERROR:  null value in column "date_of_birth" violates not-null constraint
+2024-08-14 11:39:35.657 EDT [10260] DETAIL:  Failing row contains (2024-08-14 15:39:35.652695+00, 2024-08-14 15:39:35.652695+00, 2a1bddb0-8732-4735-b60d-b0547ed3ceac, Marko Customer, something@marko.com, 3213674956, null, , , , , , , , null, f, open, fasdfa, a0faa0e6-f735-4b97-b99c-26882a1ee05f, null, dfa4be1d-ae0c-4924-99b9-9133be94b7ce, a0faa0e6-f735-4b97-b99c-26882a1ee05f, null, null, null, null, null, null, null).
+2024-08-14 11:39:35.657 EDT [10260] STATEMENT:  INSERT INTO "accounts" ("created_at", "updated_at", "created_by_id", "updated_by_id", "id", "name", "email", "phone", "date_of_birth", "industry", "billing_address_line", "billing_street", "billing_city", "billing_state", "billing_postcode", "billing_country", "previous_residency_address_line", "previous_residency_street", "previous_residency_city", "previous_residency_state", "previous_residency_postcode", "previous_billing_country", "website", "description", "is_active", "status", "lead_id", "contact_name", "org_id") VALUES ('2024-08-14T15:39:35.652695+00:00'::timestamptz, '2024-08-14T15:39:35.652695+00:00'::timestamptz, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, '2a1bddb0-8732-4735-b60d-b0547ed3ceac'::uuid, 'Marko Customer', 'something@marko.com', '3213674956', NULL, NULL, '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, false, 'open', NULL, 'fasdfa', 'dfa4be1d-ae0c-4924-99b9-9133be94b7ce'::uuid)
+2024-08-14 11:41:26.684 EDT [1920] ERROR:  null value in column "date_of_birth" violates not-null constraint
+2024-08-14 11:41:26.684 EDT [1920] DETAIL:  Failing row contains (2024-08-14 15:41:26.683486+00, 2024-08-14 15:41:26.683486+00, d27d6ca9-e072-49de-ae7a-336c03c9157e, Marko Customer, sometest@gmail.com, 3213453212, null, , , , , , , , null, f, open, fasdfa, a0faa0e6-f735-4b97-b99c-26882a1ee05f, null, dfa4be1d-ae0c-4924-99b9-9133be94b7ce, a0faa0e6-f735-4b97-b99c-26882a1ee05f, null, null, null, null, null, null, null).
+2024-08-14 11:41:26.684 EDT [1920] STATEMENT:  INSERT INTO "accounts" ("created_at", "updated_at", "created_by_id", "updated_by_id", "id", "name", "email", "phone", "date_of_birth", "industry", "billing_address_line", "billing_street", "billing_city", "billing_state", "billing_postcode", "billing_country", "previous_residency_address_line", "previous_residency_street", "previous_residency_city", "previous_residency_state", "previous_residency_postcode", "previous_billing_country", "website", "description", "is_active", "status", "lead_id", "contact_name", "org_id") VALUES ('2024-08-14T15:41:26.683486+00:00'::timestamptz, '2024-08-14T15:41:26.683486+00:00'::timestamptz, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, 'd27d6ca9-e072-49de-ae7a-336c03c9157e'::uuid, 'Marko Customer', 'sometest@gmail.com', '3213453212', NULL, NULL, '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, false, 'open', NULL, 'fasdfa', 'dfa4be1d-ae0c-4924-99b9-9133be94b7ce'::uuid)
+2024-08-14 11:41:26.852 EDT [32692] ERROR:  null value in column "date_of_birth" violates not-null constraint
+2024-08-14 11:41:26.852 EDT [32692] DETAIL:  Failing row contains (2024-08-14 15:41:26.851398+00, 2024-08-14 15:41:26.851398+00, 5740f817-36ed-4e22-a57a-7a6768d8d143, Marko Customer, sometest@gmail.com, 3213453212, null, , , , , , , , null, f, open, fasdfa, a0faa0e6-f735-4b97-b99c-26882a1ee05f, null, dfa4be1d-ae0c-4924-99b9-9133be94b7ce, a0faa0e6-f735-4b97-b99c-26882a1ee05f, null, null, null, null, null, null, null).
+2024-08-14 11:41:26.852 EDT [32692] STATEMENT:  INSERT INTO "accounts" ("created_at", "updated_at", "created_by_id", "updated_by_id", "id", "name", "email", "phone", "date_of_birth", "industry", "billing_address_line", "billing_street", "billing_city", "billing_state", "billing_postcode", "billing_country", "previous_residency_address_line", "previous_residency_street", "previous_residency_city", "previous_residency_state", "previous_residency_postcode", "previous_billing_country", "website", "description", "is_active", "status", "lead_id", "contact_name", "org_id") VALUES ('2024-08-14T15:41:26.851398+00:00'::timestamptz, '2024-08-14T15:41:26.851398+00:00'::timestamptz, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, '5740f817-36ed-4e22-a57a-7a6768d8d143'::uuid, 'Marko Customer', 'sometest@gmail.com', '3213453212', NULL, NULL, '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, false, 'open', NULL, 'fasdfa', 'dfa4be1d-ae0c-4924-99b9-9133be94b7ce'::uuid)
+2024-08-14 11:44:42.271 EDT [22484] ERROR:  null value in column "date_of_birth" violates not-null constraint
+2024-08-14 11:44:42.271 EDT [22484] DETAIL:  Failing row contains (2024-08-14 15:44:42.270627+00, 2024-08-14 15:44:42.270627+00, 9525bd5a-3c57-4a5e-9f0d-315c24330c6f, Marko Customer, sometest@gmail.com, 3213453212, null, , , , , , , , null, f, open, fasdfa, a0faa0e6-f735-4b97-b99c-26882a1ee05f, null, dfa4be1d-ae0c-4924-99b9-9133be94b7ce, a0faa0e6-f735-4b97-b99c-26882a1ee05f, null, null, null, null, null, null, null).
+2024-08-14 11:44:42.271 EDT [22484] STATEMENT:  INSERT INTO "accounts" ("created_at", "updated_at", "created_by_id", "updated_by_id", "id", "name", "email", "phone", "date_of_birth", "industry", "billing_address_line", "billing_street", "billing_city", "billing_state", "billing_postcode", "billing_country", "previous_residency_address_line", "previous_residency_street", "previous_residency_city", "previous_residency_state", "previous_residency_postcode", "previous_billing_country", "website", "description", "is_active", "status", "lead_id", "contact_name", "org_id") VALUES ('2024-08-14T15:44:42.270627+00:00'::timestamptz, '2024-08-14T15:44:42.270627+00:00'::timestamptz, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, '9525bd5a-3c57-4a5e-9f0d-315c24330c6f'::uuid, 'Marko Customer', 'sometest@gmail.com', '3213453212', NULL, NULL, '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, false, 'open', NULL, 'fasdfa', 'dfa4be1d-ae0c-4924-99b9-9133be94b7ce'::uuid)
+2024-08-14 11:44:43.985 EDT [11056] ERROR:  null value in column "date_of_birth" violates not-null constraint
+2024-08-14 11:44:43.985 EDT [11056] DETAIL:  Failing row contains (2024-08-14 15:44:43.984535+00, 2024-08-14 15:44:43.984535+00, dc68bd7f-47a9-48db-bf64-bf4844571183, Marko Customer, sometest@gmail.com, 3213453212, null, , , , , , , , null, f, open, fasdfa, a0faa0e6-f735-4b97-b99c-26882a1ee05f, null, dfa4be1d-ae0c-4924-99b9-9133be94b7ce, a0faa0e6-f735-4b97-b99c-26882a1ee05f, null, null, null, null, null, null, null).
+2024-08-14 11:44:43.985 EDT [11056] STATEMENT:  INSERT INTO "accounts" ("created_at", "updated_at", "created_by_id", "updated_by_id", "id", "name", "email", "phone", "date_of_birth", "industry", "billing_address_line", "billing_street", "billing_city", "billing_state", "billing_postcode", "billing_country", "previous_residency_address_line", "previous_residency_street", "previous_residency_city", "previous_residency_state", "previous_residency_postcode", "previous_billing_country", "website", "description", "is_active", "status", "lead_id", "contact_name", "org_id") VALUES ('2024-08-14T15:44:43.984535+00:00'::timestamptz, '2024-08-14T15:44:43.984535+00:00'::timestamptz, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, 'a0faa0e6-f735-4b97-b99c-26882a1ee05f'::uuid, 'dc68bd7f-47a9-48db-bf64-bf4844571183'::uuid, 'Marko Customer', 'sometest@gmail.com', '3213453212', NULL, NULL, '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, false, 'open', NULL, 'fasdfa', 'dfa4be1d-ae0c-4924-99b9-9133be94b7ce'::uuid)
+2024-08-14 11:49:59.669 EDT [424] ERROR:  column "previous_residency_country" of relation "accounts" does not exist
+2024-08-14 11:49:59.669 EDT [424] STATEMENT:  ALTER TABLE "accounts" DROP COLUMN "previous_residency_country" CASCADE
+2024-08-20 09:34:41.144 EDT [25268] LOG:  received fast shutdown request
+2024-08-20 09:34:41.147 EDT [25268] LOG:  aborting any active transactions
+2024-08-20 09:34:41.150 EDT [26164] ERROR:  canceling statement due to user request
+2024-08-20 09:34:41.150 EDT [34812] FATAL:  terminating connection due to administrator command
+2024-08-20 09:34:41.150 EDT [48008] FATAL:  terminating connection due to administrator command
+2024-08-20 09:34:41.150 EDT [16324] FATAL:  terminating connection due to administrator command
+2024-08-20 09:34:41.163 EDT [25268] LOG:  background worker "logical replication launcher" (PID 26164) exited with exit code 1
+2024-08-20 09:34:41.180 EDT [23548] LOG:  shutting down
+2024-08-20 09:34:41.221 EDT [25268] LOG:  database system is shut down
+2024-08-23 16:12:11.914 EDT [17608] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-23 16:12:11.918 EDT [17608] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-23 16:12:11.918 EDT [17608] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-23 16:12:11.991 EDT [43496] LOG:  database system was shut down at 2024-08-20 09:34:41 EDT
+2024-08-23 16:12:12.040 EDT [17608] LOG:  database system is ready to accept connections
+2024-08-25 12:34:37.006 EDT [45600] FATAL:  terminating connection due to unexpected postmaster exit
+2024-08-27 14:34:25.004 EDT [5472] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
+2024-08-27 14:34:25.007 EDT [5472] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-27 14:34:25.007 EDT [5472] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-27 14:34:25.086 EDT [35416] LOG:  database system was interrupted; last known up at 2024-08-23 16:17:12 EDT
+2024-08-27 14:34:25.882 EDT [35416] LOG:  database system was not properly shut down; automatic recovery in progress
+2024-08-27 14:34:25.885 EDT [35416] LOG:  redo starts at 0/1E042F8
+2024-08-27 14:34:25.885 EDT [35416] LOG:  invalid record length at 0/1E043E0: wanted 24, got 0
+2024-08-27 14:34:25.885 EDT [35416] LOG:  redo done at 0/1E043A8
+2024-08-27 14:34:25.923 EDT [5472] LOG:  database system is ready to accept connections
+2024-08-28 10:54:05.138 EDT [5472] LOG:  received fast shutdown request
+2024-08-28 10:54:05.140 EDT [5472] LOG:  aborting any active transactions
+2024-08-28 10:54:05.143 EDT [36188] FATAL:  terminating connection due to administrator command
+2024-08-28 10:54:05.144 EDT [33892] ERROR:  canceling statement due to user request
+2024-08-28 10:54:05.150 EDT [5472] LOG:  background worker "logical replication launcher" (PID 33892) exited with exit code 1
+2024-08-28 10:54:05.153 EDT [31788] LOG:  shutting down
+2024-08-28 10:54:05.178 EDT [5472] LOG:  database system is shut down
 2024-08-03 08:51:36.315 EDT [11292] LOG:  starting PostgreSQL 12.15, compiled by Visual C++ build 1916, 64-bit
 2024-08-03 08:51:36.318 EDT [11292] LOG:  listening on IPv6 address "::1", port 5432
 2024-08-03 08:51:36.318 EDT [11292] LOG:  listening on IPv4 address "127.0.0.1", port 5432

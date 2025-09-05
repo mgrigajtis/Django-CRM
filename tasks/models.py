@@ -8,7 +8,6 @@ from common.models import Org, Profile
 from contacts.models import Contact
 from teams.models import Teams
 
-
 class Task(BaseModel):
 
     STATUS_CHOICES = (
@@ -26,6 +25,14 @@ class Task(BaseModel):
     account = models.ForeignKey(
         Account,
         related_name="accounts_tasks",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+
+    lead = models.ForeignKey(
+        "leads.Lead",
+        related_name="leads_tasks",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

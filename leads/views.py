@@ -205,48 +205,48 @@ class LeadListView(APIView, LimitOffsetPagination):
                 )
                 lead_obj.assigned_to.add(*profiles)
 
-            if data.get("status") == "converted":
-                account_object = Account.objects.create(
-                    created_by=request.profile.user,
-                    name=lead_obj.account_name,
-                    email=lead_obj.email,
-                    phone=lead_obj.phone,
-                    description=data.get("description"),
-                    website=data.get("website"),
-                    org=request.profile.org,
-                )
+            #if data.get("status") == "converted":
+            #    account_object = Account.objects.create(
+            #        created_by=request.profile.user,
+            #        name=lead_obj.account_name,
+            #        email=lead_obj.email,
+            #        phone=lead_obj.phone,
+            #        description=data.get("description"),
+            #        website=data.get("website"),
+            #        org=request.profile.org,
+            #    )
 
-                account_object.billing_address_line = lead_obj.address_line
-                account_object.billing_street = lead_obj.street
-                account_object.billing_city = lead_obj.city
-                account_object.billing_state = lead_obj.state
-                account_object.billing_postcode = lead_obj.postcode
-                account_object.billing_country = lead_obj.country
-                comments = Comment.objects.filter(lead=self.lead_obj)
-                if comments.exists():
-                    for comment in comments:
-                        comment.account_id = account_object.id
-                attachments = Attachments.objects.filter(lead=self.lead_obj)
-                if attachments.exists():
-                    for attachment in attachments:
-                        attachment.account_id = account_object.id
-                for tag in lead_obj.tags.all():
-                    account_object.tags.add(tag)
+            #    account_object.billing_address_line = lead_obj.address_line
+            #    account_object.billing_street = lead_obj.street
+            #    account_object.billing_city = lead_obj.city
+            #    account_object.billing_state = lead_obj.state
+            #    account_object.billing_postcode = lead_obj.postcode
+            #    account_object.billing_country = lead_obj.country
+            #    comments = Comment.objects.filter(lead=self.lead_obj)
+            #    if comments.exists():
+            #        for comment in comments:
+            #            comment.account_id = account_object.id
+            #    attachments = Attachments.objects.filter(lead=self.lead_obj)
+            #    if attachments.exists():
+            #        for attachment in attachments:
+            #            attachment.account_id = account_object.id
+            #    for tag in lead_obj.tags.all():
+            #        account_object.tags.add(tag)
 
-                if data.get("assigned_to",None):
-                    assigned_to_list = data.getlist("assigned_to")
-                    recipients = assigned_to_list
-                    send_email_to_assigned_user.delay(
-                        recipients,
-                        lead_obj.id,
-                    )
-                return Response(
-                    {
-                        "error": False,
-                        "message": "Lead Converted to Account Successfully",
-                    },
-                    status=status.HTTP_200_OK,
-                )
+            #    if data.get("assigned_to",None):
+            #        assigned_to_list = data.getlist("assigned_to")
+            #        recipients = assigned_to_list
+            #        send_email_to_assigned_user.delay(
+            #            recipients,
+            #            lead_obj.id,
+            #        )
+            #    return Response(
+            #        {
+            #            "error": False,
+            #            "message": "Lead Converted to Account Successfully",
+            #        },
+            #        status=status.HTTP_200_OK,
+            #    )
             return Response(
                 {"error": False, "message": "Lead Created Successfully"},
                 status=status.HTTP_200_OK,

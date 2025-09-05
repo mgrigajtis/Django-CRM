@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
-from common.models import Address, Org, Profile
+from common.models import Address, Org, Profile, CustomPhoneNumberField
 from common.base import BaseModel
 from common.utils import COUNTRIES
 from teams.models import Teams
@@ -20,8 +20,8 @@ class Contact(BaseModel):
     title = models.CharField(_("Title"), max_length=255, default="", blank=True)
     primary_email = models.EmailField(unique=True)
     secondary_email = models.EmailField(default="", blank=True)
-    mobile_number = PhoneNumberField(null=True, unique=True)
-    secondary_number = PhoneNumberField(null=True,blank=True)
+    mobile_number = CustomPhoneNumberField(null=True, unique=True)
+    secondary_number = CustomPhoneNumberField(null=True,blank=True)
     department = models.CharField(_("Department"), max_length=255, null=True)
     language = models.CharField(_("Language"), max_length=255, null=True)
     do_not_call = models.BooleanField(default=False)
